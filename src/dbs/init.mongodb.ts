@@ -14,7 +14,9 @@ class Database {
       mongoose.set('debug', { color: true });
     }
     mongoose
-      .connect('mongodb://root:example@localhost:27017')
+      .connect(
+        process.env.MONGO_DB_URI || 'mongodb://root:example@localhost:27017',
+      )
       .then(() => console.log(`Connected to MongoDB: ${countConnection()}`))
       .catch((err) => console.log(err));
   }

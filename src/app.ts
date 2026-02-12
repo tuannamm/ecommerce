@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import initMongoDB from './dbs/init.mongodb';
-import { checkOverload } from './helpers/check-connect';
 import router from './routes';
 
 const app = express();
@@ -18,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // init db
 initMongoDB;
-checkOverload();
+// checkOverload();
 
 // init route
 app.use('', router);

@@ -37,6 +37,7 @@ export const shopSchema = new Schema(
   {
     timestamps: true,
     collection: COLLECTION_NAME,
+    versionKey: false,
   },
 );
 

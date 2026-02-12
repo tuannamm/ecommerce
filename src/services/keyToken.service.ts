@@ -12,12 +12,13 @@ export class KeyTokenService {
     publicKey,
   }: CreateKeyTokenInterface) => {
     try {
-      const publicKeyString = publicKey.toString();
       const token = await keyTokenModel.create({
         users: userId,
-        publicKey: publicKeyString,
+        publicKey,
       });
       return token ? publicKey : null;
-    } catch (error) {}
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 }

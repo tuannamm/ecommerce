@@ -15,7 +15,7 @@ export const keyTokenSchema = new Schema(
     },
     privateKey: {
       type: String,
-      required: true,
+      required: false,
     },
     refreshToken: {
       type: Array,
@@ -25,6 +25,7 @@ export const keyTokenSchema = new Schema(
   {
     timestamps: true,
     collection: COLLECTION_NAME,
+    versionKey: false,
   },
 );
 
