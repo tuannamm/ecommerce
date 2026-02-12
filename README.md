@@ -1,0 +1,2 @@
+- helmet: bảo mật - khi client gửi request thì server sẽ trả về response với header bảo mật (không có x-powered-by -> không biết server đang dùng framework nào)
+- compression: nén response - giảm tải cho client
