@@ -59,6 +59,7 @@ export class AccessService {
         const publicKeyString = await KeyTokenService.createKeyToken({
           userId: newShop._id,
           publicKey: publicKey.toString(),
+          privateKey: privateKey.toString(),
         });
 
         if (!publicKeyString) {
