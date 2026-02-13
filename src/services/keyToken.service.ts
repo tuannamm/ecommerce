@@ -16,7 +16,7 @@ export class KeyTokenService {
         users: userId,
         publicKey,
       });
-      return token ? publicKey : null;
+      return token ? token.publicKey : null;
     } catch (error) {
       console.log('error', error);
     }

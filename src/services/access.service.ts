@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import { shopModel } from '../models';
 import { KeyTokenService } from './keyToken.service';
 import { createTokenPair } from '../auth/authUtils';
+import { getInfoData } from '../utils';
 
 const RoleShop = {
   SHOP: 'SHOP',
@@ -45,6 +46,14 @@ export class AccessService {
         // create privateKey and publicKey
         const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
           modulusLength: 2048,
+          publicKeyEncoding: {
+            type: 'pkcs1',
+            format: 'pem',
+          },
+          privateKeyEncoding: {
+            type: 'pkcs1',
+            format: 'pem',
+          },
         });
 
         const publicKeyString = await KeyTokenService.createKeyToken({
@@ -72,7 +81,10 @@ export class AccessService {
         return {
           code: 201,
           metadata: {
-            shop: newShop,
+            shop: getInfoData({
+              fields: ['_id', 'name', 'email'],
+              object: newShop,
+            }),
             tokens,
           },
         };
