@@ -1,3 +1,3 @@
 export * from './access.service';
 
-export * from './keyToken.service';
+export * from './key-token.service';

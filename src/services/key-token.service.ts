@@ -1,4 +1,4 @@
-import { keyTokenModel } from '../models/keytoken.model';
+import { keyTokenModel } from '../models/key-token.model';
 import { Types } from 'mongoose';
 
 interface CreateKeyTokenInterface {

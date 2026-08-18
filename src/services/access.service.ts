@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt-ts';
 import crypto from 'crypto';
 
 import { shopModel } from '../models';
-import { KeyTokenService } from './keyToken.service';
+import { KeyTokenService } from './key-token.service';
 import { createTokenPair } from '../auth/authUtils';
 import { getInfoData } from '../utils';
 
