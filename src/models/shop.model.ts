@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 
-const DOCUMENT_NAME = 'Shop';
-const COLLECTION_NAME = 'Shops';
+const DOCUMENT_NAME = 'shop';
+const COLLECTION_NAME = 'shops';
 
 export const shopSchema = new Schema(
   {
