@@ -1,0 +1,53 @@
+### Access API flow (VS Code REST Client / JetBrains HTTP Client)
+#
+# Prereq: server running (`npm run start:dev`) and one api-key doc in Mongo, e.g.
+#   db['api-keys'].insertOne({ key: 'dev-key-0000', status: true, permissions: ['0000'] })
+# Every request passes checkAuth (x-api-key) then permission('0000').
+
+@host = http://localhost:5005
+@apiKey = dev-key-0000
+@email = shop-{{$timestamp}}@example.com
+
+### 1. Health check, valid key -> 200 Hello world
+GET {{host}}/
+x-api-key: {{apiKey}}
+
+### 2. No x-api-key header -> 403 Forbidden error
+GET {{host}}/
+
+### 3. Unknown x-api-key -> 403 Forbidden error
+GET {{host}}/
+x-api-key: not-a-real-key
+
+### 4. Sign up a new shop -> 201, metadata.shop + metadata.tokens
+POST {{host}}/api/v1/shop/signup
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Shop Test",
+  "email": "{{email}}",
+  "password": "123456"
+}
+
+### 5. Sign up without api key -> 403 Forbidden error
+POST {{host}}/api/v1/shop/signup
+Content-Type: application/json
+
+{
+  "name": "Shop Test",
+  "email": "{{email}}",
+  "password": "123456"
+}
+
+### 6. Sign up again with same email (run 4 first, reuse its email) -> expect an error, see note
+# NOTE: {{email}} is regenerated per request, so paste the email from request 4 here.
+POST {{host}}/api/v1/shop/signup
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Shop Test",
+  "email": "PASTE-EMAIL-FROM-REQUEST-4",
+  "password": "123456"
+}

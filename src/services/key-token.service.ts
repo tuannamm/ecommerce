@@ -8,11 +8,7 @@ interface CreateKeyTokenInterface {
 }
 
 export class KeyTokenService {
-  static createKeyToken = async ({
-    userId,
-    publicKey,
-    privateKey,
-  }: CreateKeyTokenInterface) => {
+  static createKeyToken = async ({ userId, publicKey, privateKey }: CreateKeyTokenInterface) => {
     try {
       const token = await keyTokenModel.create({
         users: userId,
